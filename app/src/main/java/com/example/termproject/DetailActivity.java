@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         intent.getStringExtra("date");
-        
+
 
     }
 }
