@@ -10,12 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MonthView extends AppCompatActivity {
     CalendarView calender;
     String date;
     Button detailBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, Integer.parseInt("0"));
             }
         });
-
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -68,5 +63,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-     }
+    }
 }

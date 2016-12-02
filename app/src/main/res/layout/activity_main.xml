@@ -31,5 +31,4 @@
         android:layout_marginTop="800px"
         android:text="일정상세보기"
         android:id="@+id/detail"/>
-
 </RelativeLayout>
