@@ -25,10 +25,22 @@
             android:layout_gravity="center_horizontal" />
 
     </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="900px"
+        android:text="선택날짜"
+        android:id="@+id/selectDate"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="800px"
+        android:layout_marginTop="1000px"
         android:text="일정상세보기"
-        android:id="@+id/detail"/>
+        android:id="@+id/detailDate"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1150px"
+        android:text="일정추가하기"
+        android:id="@+id/editDate"/>
 </RelativeLayout>

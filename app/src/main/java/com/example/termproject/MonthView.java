@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
@@ -19,7 +18,7 @@ public class MonthView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calender = (CalendarView) findViewById(R.id.calendarView);
+/*        calender = (CalendarView) findViewById(R.id.calendarView);
         detailBtn = (Button) findViewById(R.id.detail);
 
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -37,7 +36,7 @@ public class MonthView extends AppCompatActivity {
                 intent.putExtra("date", date);
                 startActivityForResult(intent, Integer.parseInt("0"));
             }
-        });
+        });*/
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
