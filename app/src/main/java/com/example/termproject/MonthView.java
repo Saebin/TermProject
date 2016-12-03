@@ -1,66 +1,67 @@
 package com.example.termproject;
 
-import android.content.Intent;
+import android.app.Fragment;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Button;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
-public class MonthView extends AppCompatActivity {
+public class MonthView extends Fragment {
     CalendarView calender;
     String date;
-    Button detailBtn;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    TextView selectDate;
+    private MyDBHelper helper;
 
-/*        calender = (CalendarView) findViewById(R.id.calendarView);
-        detailBtn = (Button) findViewById(R.id.detail);
+    public MonthView() {}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View v = inflater.inflate(R.layout.activity_month, container, false);
+        calender = (CalendarView) v.findViewById(R.id.calendarView);
+        helper = new MyDBHelper(getActivity());
 
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                date = year + "년 " + (month + 1) + "월" + dayOfMonth + "일";
-            }
+                long dateLong = calender.getDate();
 
+                //Toast.makeText(MainActivity.this, "sadf", 0).show();
+                date = year + "년" + month + "월" + dayOfMonth + "일";
+                //selectDate.setText(year + "년 " + month + " 월" + dayOfMonth + " 일");
+                Log.i("Detail Test :" , date);
+            }
         });
 
-        detailBtn.setOnClickListener(new View.OnClickListener() {
+        TextView test = (TextView) v.findViewById(R.id.textSC);
+        String sql = "Select * FROM schedule";
+        Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            buffer.append(cursor.getString(1)+"\t\t");
+            buffer.append(cursor.getString(2)+"\n");
+        }
+        test.setText(buffer);
+
+/*        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("date", date);
-                startActivityForResult(intent, Integer.parseInt("0"));
+                //Log.i("onClick Test :" , date);
+                Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
+                detailIntent.putExtra("detaildate", date);
+                startActivityForResult(detailIntent, Integer.parseInt("0"));
             }
         });*/
+
+        return v;
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.addScedule:
-                startActivity(new Intent(this, AddActivity.class));
-                return true;
-            case R.id.monthView:
-                startActivity(new Intent(this, MonthView.class));
-                return true;
-            case R.id.weekView:
-                startActivity(new Intent(this, WeekView.class));
-                return true;
-            case R.id.dayView:
-                startActivity(new Intent(this, DayView.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
+
 }

@@ -1,34 +1,25 @@
 package com.example.termproject;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class WeekView extends AppCompatActivity {
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+public class WeekView extends Fragment {
+    public WeekView() {
+
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.addScedule:
-                startActivity(new Intent(this, AddActivity.class));
-                return true;
-            case R.id.monthView:
-                startActivity(new Intent(this, MonthView.class));
-                return true;
-            case R.id.weekView:
-                startActivity(new Intent(this, WeekView.class));
-                return true;
-            case R.id.dayView:
-                startActivity(new Intent(this, DayView.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.activity_week, container, false);
+
+        TextView weekView = (TextView) v.findViewById(R.id.weekView);
+        weekView.setText("확인");
+        return v;
     }
 }

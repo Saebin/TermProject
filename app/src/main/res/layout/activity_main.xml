@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -12,35 +12,27 @@
     tools:context="com.example.termproject.MainActivity">
 
     <FrameLayout
-
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <CalendarView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/calendarView"
-            android:layout_gravity="center_horizontal" />
-
+        android:id="@+id/container" >
     </FrameLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="900px"
-        android:text="선택날짜"
-        android:id="@+id/selectDate"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1000px"
-        android:text="일정상세보기"
-        android:id="@+id/detailDate"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1150px"
-        android:text="일정추가하기"
-        android:id="@+id/editDate"/>
+
+    <!--    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="900px"
+            android:text="선택날짜"
+            android:id="@+id/selectDate"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1000px"
+            android:text="일정상세보기"
+            android:id="@+id/detailDate"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1150px"
+            android:text="일정추가하기"
+            android:id="@+id/editDate"/>-->
 </RelativeLayout>

@@ -1,6 +1,6 @@
 package com.example.termproject;
 
-import android.database.Cursor;
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -96,7 +95,10 @@ public class AddActivity extends AppCompatActivity {
                                         "VALUES (NULL, '%s', '%s', '%s')",
                                 textStr, dateStr, "장소입력");
                         helper.getWritableDatabase().execSQL(sql);
-                        //Log.i("Test : ", date +"///"+ dateTime);
+
+                        Intent intent_result = new Intent(getApplicationContext(), DetailActivity.class);
+                        startActivity(intent_result);
+
                     } catch (SQLException e) {
                         Log.e("ERROR : ", e.toString());
                     }
@@ -120,17 +122,6 @@ public class AddActivity extends AppCompatActivity {
         }
             }
         });
-
-
-        TextView test = (TextView) findViewById(R.id.textview);
-        String sql = "Select * FROM schedule";
-        Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
-        StringBuffer buffer = new StringBuffer();
-        while (cursor.moveToNext()) {
-            buffer.append(cursor.getString(1)+"\t\t");
-            buffer.append(cursor.getString(2)+"\n");
-        }
-        test.setText(buffer);
     }
 /*    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
