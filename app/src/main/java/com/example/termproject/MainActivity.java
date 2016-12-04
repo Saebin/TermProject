@@ -25,50 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         switchFragment(0);
-
-        calender = (CalendarView) findViewById(R.id.calendarView);
-
-        //selectDate = (TextView) findViewById(R.id.selectDate);
-/*        detailBtn = (Button) findViewById(R.id.detailDate);
-        editBtn = (Button) findViewById(R.id.editDate);
-
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                long dateLong = calender.getDate();
-
-                //Toast.makeText(MainActivity.this, "sadf", 0).show();
-                date = year + "년 " + month + "월" + dayOfMonth + "일";
-                selectDate.setText(year + "년 " + month + " 월" + dayOfMonth + " 일");
-                Log.i("Detail Test :" , date);
-            }
-
-        });
-
-        detailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.i("onClick Test :" , date);
-                Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
-                detailIntent.putExtra("detaildate", date);
-                startActivityForResult(detailIntent, Integer.parseInt("0"));
-            }
-        });
-
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.i("onClick Test :" , date);
-                if(date == null) {
-                   // startActivity(new Intent(this, EditActivity.class));
-                }
-                else{
-                    Intent editIntent = new Intent(getApplicationContext(), AddActivity.class);
-                    editIntent.putExtra("editdate", date);
-                    startActivityForResult(editIntent, Integer.parseInt("0"));
-                }
-            }
-        });*/
     }
 
     @Override

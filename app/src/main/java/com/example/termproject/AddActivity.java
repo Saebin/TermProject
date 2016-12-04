@@ -9,18 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import android.widget.TextView;
 
 
 public class AddActivity extends AppCompatActivity {
     private MyDBHelper helper;
     DatePicker datePicker;
 
+    private String date;
     private int Year;
     private int Month;
     private int day;
@@ -42,10 +38,14 @@ public class AddActivity extends AppCompatActivity {
                     public void onDateChanged(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                         Year = year;
-                        Month = monthOfYear;
+                        Month = monthOfYear+1;
                         day = dayOfMonth;
-                        //String msg = String.format("%d / %d / %d", year,monthOfYear, dayOfMonth);
-                        //Toast.makeText(AddActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        TextView dateText = (TextView) findViewById(R.id.date);
+
+                        date = Year + "" + Month + "" + day;
+                        dateText.setText(date);
+
                     }
                 });
 
@@ -53,58 +53,21 @@ public class AddActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //EditText title = (EditText)findViewById(R.id.title1);
-/*                Intent intent = getIntent();
-                String date = intent.getStringExtra("editdate");
-                DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-                String datetime = df.format(Calendar.getInstance().getTime());
 
-                SimpleDateFormat Year = new  SimpleDateFormat("yyyy", Locale.KOREA);
-                SimpleDateFormat Month = new  SimpleDateFormat("MM", Locale.KOREA);
-                SimpleDateFormat day = new  SimpleDateFormat("dd", Locale.KOREA);
-
-                long now = System.currentTimeMillis();
-
-                Date YearDate = new Date(now);
-                String yearStr = Year.format(YearDate);
-                Date MonthDate = new Date(now);
-                String monthStr = Month.format(MonthDate);
-                Date DayDate = new Date(now);
-                String dayStr = day.format(DayDate);
-
-                Log.i("Testssssssssssssssss : ", date +"///"+ yearStr+"///"+ monthStr+"///"+ dayStr);*/
-
-                EditText text = (EditText) findViewById(R.id.subject);
-                String textStr = text.getText().toString();
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-                String strDate = String.valueOf(Year) + "-" + String.valueOf(Month) + "-" + String.valueOf(day);
-                Date addDate;
-                DateFormat tt = DateFormat.getDateInstance(DateFormat.MEDIUM);
-
-                Log.i("sfgaerg:", strDate);
+                EditText title = (EditText) findViewById(R.id.title);
+                EditText content = (EditText) findViewById(R.id.content);
 
                 try {
-                    addDate = dateFormat.parse(strDate);
-                    String dateStr = dateFormat.format(addDate);
-                    Log.i("SSSSSSSSSSSSSS:", addDate.toString());
+                    String sql = String.format(
+                            "INSERT INTO schedule (id, date, title, content, place)\n" +
+                                    "VALUES (NULL, '%s', '%s', '%s', '%s')",
+                            date, title.getText(), content.getText(), "장소입력");
+                    helper.getWritableDatabase().execSQL(sql);
+                    Intent intent_result = new Intent(getApplicationContext(), DetailActivity.class);
+                    startActivity(intent_result);
 
-                    try {
-                        String sql = String.format(
-                                "INSERT INTO schedule (id, title, date, place)\n" +
-                                        "VALUES (NULL, '%s', '%s', '%s')",
-                                textStr, dateStr, "장소입력");
-                        helper.getWritableDatabase().execSQL(sql);
-
-                        Intent intent_result = new Intent(getApplicationContext(), DetailActivity.class);
-                        startActivity(intent_result);
-
-                    } catch (SQLException e) {
-                        Log.e("ERROR : ", e.toString());
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } catch (SQLException e) {
+                    Log.e("ERROR : ", e.toString());
                 }
 
             }
@@ -114,12 +77,7 @@ public class AddActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    try {
-            String sql = String.format ("DELETE FROM schedule\n");
-            helper.getWritableDatabase().execSQL(sql);
-        } catch (SQLException e) {
-            Log.e("Sdfsdfsdf","Error deleting recodes");
-        }
+
             }
         });
     }

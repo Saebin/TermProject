@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class MyDBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME="schedule.db";
+    private static final String DB_NAME="schedule";
     private static final int DATABASE_VERSION = 1;
     public MyDBHelper(Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
@@ -14,10 +14,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE schedule (" +
                 "id INTEGER NOT NULL PRIMARY KEY," +
-                "date DATE NULL," +
+                "date TEXT NULL," +
                 "title TEXT NULL," +
-                "place TEXT NULL" +
-                ");");
+                "content TEXT NULL," +
+                "place TEXT NULL);");
     }
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS schedule");
