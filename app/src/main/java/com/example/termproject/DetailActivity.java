@@ -15,6 +15,7 @@ public class DetailActivity extends AppCompatActivity {
     String mdate = "";
     String mtitle = "";
     String mcontent = "";
+    String start, end;
 
     private String detaildate;
     private String title;
@@ -34,12 +35,20 @@ public class DetailActivity extends AppCompatActivity {
         Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
         while (cursor.moveToNext()) {
             mdate = cursor.getString(1);
-            mtitle = cursor.getString(2);
-            mcontent = cursor.getString(3);
+            start = cursor.getString(2);
+            end = cursor.getString(3);
+            mtitle = cursor.getString(4);
+            mcontent = cursor.getString(5);
         }
 
         TextView dateText = (TextView) findViewById(R.id.date);
         dateText.setText(mdate);
+
+        TextView startText = (TextView) findViewById(R.id.start);
+        startText.setText(start);
+
+        TextView endText = (TextView) findViewById(R.id.end);
+        endText.setText(end);
 
         TextView titleText = (TextView) findViewById(R.id.title);
         titleText.setText(mtitle);

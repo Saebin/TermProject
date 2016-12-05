@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,27 +36,31 @@ public class MonthView extends Fragment {
         helper = new MyDBHelper(getActivity());
         adapter = new ContactsAdapter(getActivity(), R.layout.activity_list, data);
 
-/*        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                 Year = year;
                 Month = month + 1;
                 Day = dayOfMonth;
-                date = Year + "" + Month + "" + Day;
-                TextView test = (TextView) v.findViewById(R.id.textSC);
+                date = Year + "-" + Month;
 
-                String sql = "Select * FROM schedule where date ='"+ date +"';";
+                TextView list = (TextView) v.findViewById(R.id.list);
+                list.setText(Year+ "년 " + Month + "월달 일정 리스트");
+
+                String getDate = Year + "-" + Month;
+                String sql = "Select * FROM schedule where date LIKE '"+ getDate +"%';";
                 Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
+                data.clear();
                 while (cursor.moveToNext()) {
-                    data.add(new MyItem(1, cursor.getString(1), cursor.getString(2)));
+                    data.add(new MyItem(1, cursor.getString(1), cursor.getString(4)));
                 }
                 ListView listView = (ListView)v.findViewById(R.id.listView);
                 listView.setAdapter(adapter);
 
 
             }
-        });*/
+        });
 
         Calendar cal = Calendar.getInstance();
 
@@ -63,12 +68,15 @@ public class MonthView extends Fragment {
         int month = cal.get ( cal.MONTH ) + 1 ;
         int date = cal.get ( cal.DATE ) ;
 
+        TextView list = (TextView) v.findViewById(R.id.list);
+        list.setText(year+ "년 " + month + "월달 일정 리스트");
+
         String getDate = year + "-" + month;
         String sql = "Select * FROM schedule where date LIKE '"+ getDate +"%';";
         Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
         data.clear();
         while (cursor.moveToNext()) {
-            data.add(new MyItem(1, cursor.getString(1), cursor.getString(2)));
+            data.add(new MyItem(1, cursor.getString(1), cursor.getString(4)));
         }
         ListView listView = (ListView)v.findViewById(R.id.listView);
         listView.setAdapter(adapter);
