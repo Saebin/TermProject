@@ -41,27 +41,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MonthView"
+        <activity android:name=".ModifyActivity"
             android:parentActivityName=".MainActivity"
-            android:label="월별 보기">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".WeekView"
-            android:parentActivityName=".MainActivity"
-            android:label="주별 보기">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".DayView"
-            android:parentActivityName=".MainActivity"
-            android:label="일별 보기">
+            android:label="일정 수정">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
