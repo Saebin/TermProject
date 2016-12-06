@@ -69,7 +69,7 @@ public class MonthView extends Fragment {
         int date = cal.get ( cal.DATE ) ;
 
         TextView list = (TextView) v.findViewById(R.id.list);
-        list.setText(year+ "년 " + month + "월달 일정 리스트");
+        list.setText(year+ "년 " + month + "월 일정 리스트");
 
         String getDate = year + "-" + month;
         String sql = "Select * FROM schedule where date LIKE '"+ getDate +"%';";

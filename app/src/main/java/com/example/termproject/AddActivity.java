@@ -19,7 +19,8 @@ public class AddActivity extends AppCompatActivity {
     private MyDBHelper helper;
     DatePicker datePicker;
 
-    private String startime, endtime, date, atitle, acontent;
+    private String date = "";
+    private String startime, endtime, atitle, acontent = "";
     private int Year;
     private int Month;
     private int day;

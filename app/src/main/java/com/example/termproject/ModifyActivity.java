@@ -28,10 +28,11 @@ public class ModifyActivity extends AppCompatActivity {
     String mdate = "";
     String mtitle = "";
     String mcontent = "";
+    private String date = "";
     private String detaildate;
     private String title;
     private String start, end;
-    private String startime, endtime, date, atitle, acontent = "";
+    private String startime, endtime, atitle, acontent = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
