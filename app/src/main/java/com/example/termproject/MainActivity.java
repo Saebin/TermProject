@@ -7,23 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    CalendarView calender;
-    String date;
-    Button detailBtn;
-    Button editBtn;
-    TextView selectDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startActivity(new Intent(this, FirstActivity.class));
         switchFragment(0);
     }
 
@@ -69,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             this.setTitle("일별일정");
             fragmentTransaction.replace(R.id.fragment, dayView);
         }
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

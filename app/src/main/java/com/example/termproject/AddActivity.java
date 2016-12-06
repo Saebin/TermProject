@@ -127,13 +127,6 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        Button up = (Button) findViewById(R.id.update);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     private TimePickerDialog.OnTimeSetListener starttimeSetListener = new TimePickerDialog.OnTimeSetListener() {

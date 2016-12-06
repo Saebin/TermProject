@@ -17,14 +17,9 @@ import java.util.Calendar;
 
 public class WeekView extends Fragment {
     CalendarView calender;
-    String date;
     private MyDBHelper helper;
     static ContactsAdapter adapter;
     ArrayList<MyItem> data = new ArrayList<MyItem>();
-
-    int Year = 0;
-    int Month = 0;
-    int Day = 0;
 
     public WeekView() {}
 
@@ -38,65 +33,37 @@ public class WeekView extends Fragment {
         helper = new MyDBHelper(getActivity());
         adapter = new ContactsAdapter(getActivity(), R.layout.activity_list, data);
 
-/*        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-        calendar.set(Calendar.HOUR_OF_DAY, 23);//not sure this is needed
-        long endOfMonth = calendar.getTimeInMillis();
-        //may need to reinitialize calendar, not sure
-        calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        long startOfMonth = calendar.getTimeInMillis();
-        calender.setMaxDate(endOfMonth);
-        calender.setMinDate(startOfMonth);*/
-
         Calendar ccal = Calendar.getInstance();
 
-        int cyear = ccal.get ( ccal.YEAR );
-        int cmonth = ccal.get ( ccal.MONTH ) ;
-        int cdate = ccal.get ( ccal.DATE ) ;
+        ccal.set(Calendar.DAY_OF_WEEK, 1);
+
+        int year1 = ccal.get(Calendar.YEAR);
+        int month1 = ccal.get(Calendar.MONTH);
+        int day1 = ccal.get(Calendar.DAY_OF_MONTH);
+        String startDay = year1 + "-" + month1 + "-" + day1;
+
+        ccal.set(Calendar.DAY_OF_WEEK, 7);
+
+        int year7 = ccal.get(Calendar.YEAR);
+        int month7 = ccal.get(Calendar.MONTH);
+        int day7 = ccal.get(Calendar.DAY_OF_MONTH);
+        String endDay = year7 + "-" + month7 + "-" + day7;
+
+        Log.i("ASfasdf", startDay + endDay);
 
         Time myTimeMax = new Time();
-        myTimeMax.set(cdate+7, cmonth, cyear);
+        myTimeMax.set(day7, month7, year7);
         //myTimeMax.setToNow();
         calender.setDate(myTimeMax.toMillis(true));
         calender.setMaxDate(calender.getDate());
 
         Time myTimeMin = new Time();
-        myTimeMin.set(cdate, cmonth, cyear);
+        myTimeMin.set(day1, month1, year1);
         calender.setDate(myTimeMin.toMillis(true));
         calender.setMinDate(calender.getDate());
 
-
-
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-
-/*                Year = year;
-                Month = month + 1;
-                Day = dayOfMonth;
-                date = Year + "-" + Month;
-
-                TextView list = (TextView) v.findViewById(R.id.list);
-                list.setText(Year+ "년 " + Month + "월달 일정 리스트");
-
-                String getDate = Year + "-" + Month;
-                String sql = "Select * FROM schedule where date LIKE '"+ getDate +"%';";
-                Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
-                data.clear();
-                while (cursor.moveToNext()) {
-                    data.add(new MyItem(1, cursor.getString(1), cursor.getString(4)));
-                }
-                ListView listView = (ListView)v.findViewById(R.id.listView);
-                listView.setAdapter(adapter);*/
-
-
-            }
-        });
-
         Calendar cal = Calendar.getInstance();
-
+        cal.set(Calendar.DAY_OF_WEEK, 1);
         int year = cal.get ( cal.YEAR );
         int month = cal.get ( cal.MONTH ) + 1 ;
         int startDate1 = cal.get ( cal.DATE ) ;
@@ -117,16 +84,6 @@ public class WeekView extends Fragment {
         }
         ListView listView = (ListView)v.findViewById(R.id.listView);
         listView.setAdapter(adapter);
-
-/*        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.i("onClick Test :" , date);
-                Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
-                detailIntent.putExtra("detaildate", date);
-                startActivityForResult(detailIntent, Integer.parseInt("0"));
-            }
-        });*/
 
         return v;
     }

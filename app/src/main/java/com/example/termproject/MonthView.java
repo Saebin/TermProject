@@ -46,7 +46,7 @@ public class MonthView extends Fragment {
                 date = Year + "-" + Month;
 
                 TextView list = (TextView) v.findViewById(R.id.list);
-                list.setText(Year+ "년 " + Month + "월달 일정 리스트");
+                list.setText(Year+ "년 " + Month + "월 일정 리스트");
 
                 String getDate = Year + "-" + Month;
                 String sql = "Select * FROM schedule where date LIKE '"+ getDate +"%';";
@@ -80,16 +80,6 @@ public class MonthView extends Fragment {
         }
         ListView listView = (ListView)v.findViewById(R.id.listView);
         listView.setAdapter(adapter);
-
-/*        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.i("onClick Test :" , date);
-                Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
-                detailIntent.putExtra("detaildate", date);
-                startActivityForResult(detailIntent, Integer.parseInt("0"));
-            }
-        });*/
 
         return v;
     }

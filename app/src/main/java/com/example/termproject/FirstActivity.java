@@ -1,8 +1,7 @@
 package com.example.termproject;
 
-import android.animation.Animator;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends Activity {
     final String TAG = "AnimationTest";
     ImageView mSplash;
     @Override
@@ -19,24 +18,17 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
         mSplash = (ImageView) findViewById(R.id.splash);
+
     }
 
     protected void onResume() {
         super.onResume();
 
+        Log.i("asdfasdf", "sadfsdfas22222222222222222");
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        //mScreenHeight = displaymetrics.heightPixels;
 
         startSplashTweenAnimation();
-
-        /**
-         * 아래 4가지 startRocket 애니메이션 중에 하나를 선택하여 테스트해 보세요.
-         */
-        // startRocketTweenAnimation();
-//      startRocketObjectPropertyAnimation();
-//      startRocketPropertyAnimationByXML();
-//      startRocketValuePropertyAnimation();
 
     }
 
@@ -54,35 +46,13 @@ public class FirstActivity extends AppCompatActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Log.i(TAG, "onAnimationEnd");
-            finish();
+            Log.i(TAG, "onAnimationEnd!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            FirstActivity.this.finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         @Override
         public void onAnimationRepeat(Animation animation) {
-            Log.i(TAG, "onAnimationRepeat");
-        }
-    };
-
-    Animator.AnimatorListener animatorListener = new Animator.AnimatorListener() {
-        @Override
-        public void onAnimationStart(Animator animator) {
-            Log.i(TAG, "onAnimationStart");
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animator) {
-            Log.i(TAG, "onAnimationEnd");
-        }
-
-        @Override
-        public void onAnimationCancel(Animator animator) {
-            Log.i(TAG, "onAnimationCancel");
-        }
-
-        @Override
-        public void onAnimationRepeat(Animator animator) {
             Log.i(TAG, "onAnimationRepeat");
         }
     };

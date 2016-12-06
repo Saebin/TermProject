@@ -1,14 +1,18 @@
 package com.example.termproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailActivity extends AppCompatActivity {
     private MyDBHelper helper;
@@ -71,17 +75,38 @@ public class DetailActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    String sql = String.format (
-                            "DELETE FROM schedule\n"+
-                                    "WHERE date = '%s' AND title = '%s'",
-                            detaildate, title);
-                    helper.getWritableDatabase().execSQL(sql);
-                    Intent intent_result = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent_result);
-                } catch (SQLException e) {
-                    Log.e("ss","Error deleting recodes");
-                }
+                final EditText etEdit = new EditText(DetailActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(DetailActivity.this);
+                dialog.setTitle("삭제하시겠습니까?");
+
+                dialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            String sql = String.format (
+                                    "DELETE FROM schedule\n"+
+                                            "WHERE date = '%s' AND title = '%s'",
+                                    detaildate, title);
+                            helper.getWritableDatabase().execSQL(sql);
+                            Intent intent_result = new Intent(getApplicationContext(), MainActivity.class);
+                            Toast.makeText(DetailActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                            startActivity(intent_result);
+                        } catch (SQLException e) {
+                            Log.e("ss","Error deleting recodes");
+                        }
+                    }
+                });
+
+                dialog.setNegativeButton("취소",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(DetailActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+
+
+
             }
         });
 
